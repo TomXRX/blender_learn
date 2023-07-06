@@ -1,0 +1,11 @@
+blender_notebook
+
+paho-mqtt
+runipy
+numpy
+opencv-python
+matplotlib
+
+ipywidgets
+jupyterlab
+jupyterlab-git
