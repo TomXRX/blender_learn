@@ -18,14 +18,12 @@ services:
 
     volumes:
       - ./config:/config
-      - cont:/custom-cont-init.d:ro
-      - blender_learn:/config/blender_learn
+      - ./cont:/custom-cont-init.d:ro
+      - ./blender_learn:/config/blender_learn
 
     privileged: true
     devices:
       - /dev/dri:/dev/dri #optional
-
-
 
     deploy:
       resources:
@@ -33,15 +31,3 @@ services:
           cpus: '10.0'
 #           memory: 32G
           memory: 28G
-
-volumes:
-  blender_learn:
-    driver_opts:
-      type: cifs
-      o: "iocharset=utf8,username=use,password=pas,uid=1000,gid=1000"
-      device: "//somewere/blender_learn"
-  cont:
-    driver_opts:
-      type: cifs
-      o: "iocharset=utf8,username=use,password=pas,uid=0,gid=0"
-      device: "//somewere/linux_server_configs/blender_config/custom-cont-init.d"
