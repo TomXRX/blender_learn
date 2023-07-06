@@ -1,0 +1,4 @@
+need to move some files:
+cp move_to/autostart.txt ./config2/.config/openbox/autostart.txt
+
+cp move_to/menu.xml ./config2/.config/openbox/menu.xml
