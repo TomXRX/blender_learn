@@ -1,0 +1,47 @@
+version: "3"
+services:
+  bl:
+    build: .
+    image: toms/blender
+    container_name: blen
+    #command: jupyter notebook --allow-root --NotebookApp.token=abcd --no-browser --ip="0.0.0.0" --NotebookApp.notebook_dir="/"
+    ports:
+      - "8590:8888"
+      - "8591:8889"
+      - "3001:3000"
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+    security_opt:
+      - seccomp:unconfined #optional
+
+    volumes:
+      - ./config:/config
+      - cont:/custom-cont-init.d:ro
+      - blender_learn:/config/blender_learn
+
+    privileged: true
+    devices:
+      - /dev/dri:/dev/dri #optional
+
+
+
+    deploy:
+      resources:
+        limits:
+          cpus: '10.0'
+#           memory: 32G
+          memory: 28G
+
+volumes:
+  blender_learn:
+    driver_opts:
+      type: cifs
+      o: "iocharset=utf8,username=use,password=pas,uid=1000,gid=1000"
+      device: "//somewere/blender_learn"
+  cont:
+    driver_opts:
+      type: cifs
+      o: "iocharset=utf8,username=use,password=pas,uid=0,gid=0"
+      device: "//somewere/linux_server_configs/blender_config/custom-cont-init.d"
